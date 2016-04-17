@@ -11,7 +11,6 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
-
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
@@ -35,16 +34,12 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
+z = X*theta;
 
+J = 1/m*(-y'*log(sigmoid(z))-(1-y')*log(1-sigmoid(z))) + lambda/(2*m)*theta(2:end)'*theta(2:end);
 
-
-
-
-
-
-
-
-
+grad = 1/m*(sigmoid(z)-y)'*X;
+grad(2:end) = grad(2:end) + lambda/m*theta(2:end)';
 % =============================================================
 
 grad = grad(:);
